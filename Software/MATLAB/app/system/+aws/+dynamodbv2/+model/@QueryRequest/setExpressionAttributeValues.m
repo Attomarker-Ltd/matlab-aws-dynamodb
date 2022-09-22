@@ -13,7 +13,11 @@ values = expressionAttributeValues.values();
 hMapJ = java.util.HashMap;
 for n = 1:numel(keys)
     % add an entry to the HashMap per iteration
-    hMapJ.put(keys{n}, values{n}.Handle);
+    hAttributeMapJ = java.util.HashMap;
+    % TODO remove hardcoded "S" which should be
+    % set depending on the type of `values{n}` use `class`?
+    hAttributeMapJ.put("S", values{n});
+    hMapJ.put(keys{n}, hAttributeMapJ);
 end
 
 obj.Handle.setExpressionAttributeValues(hMapJ);
